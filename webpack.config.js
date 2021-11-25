@@ -3,14 +3,14 @@ const path = require('path');
 const Dotenv = require('dotenv-webpack');
 
 module.exports = {
-    entry: 'index.js',
+    entry: './lab3/front/index.js',
     output: {
         filename: 'bundle.[hash].js',
         path: path.resolve(__dirname, './dist'),
     },
     plugins: [
         new HtmlWebpackPlugin({
-            template: 'index.html',
+            template: './lab3/front/index.html',
         }),
         new Dotenv({
             systemvars: true,

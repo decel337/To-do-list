@@ -11,7 +11,7 @@
         "lint:style": "stylelint --ignore-path .gitignore \"./**/*.css\"",
         "lint:style:fix": "npm run lint:style --fix",
         "prepare": "husky install",
-        "build": "webpack --env --config webpack.config.js --mode production"
+        "build": "webpack --config webpack.config.js --mode production"
     },
     "repository": {
         "type": "git",
@@ -32,6 +32,17 @@
         "husky": "^7.0.4",
         "prettier": "^2.4.1",
         "stylelint": "^14.0.1",
-        "stylelint-config-prettier": "^9.0.3"
+        "stylelint-config-prettier": "^9.0.3",
+        "@urql/core": "^2.3.5",
+        "css-loader": "^6.5.1",
+        "dotenv-webpack": "^7.0.3",
+        "file-loader": "^6.2.0",
+        "graphql": "^16.0.1",
+        "html-webpack-plugin": "^5.5.0",
+        "style-loader": "^3.3.1",
+        "subscriptions-transport-ws": "^0.11.0",
+        "webpack": "^5.64.1",
+        "webpack-cli": "^4.9.1",
+        "wonka": "^4.0.15"
     }
 }
