@@ -1,0 +1,36 @@
+{
+    "name": "weblabs",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "lint": "eslint . --ignore-path .gitignore --no-error-on-unmatched-pattern",
+        "lint:fix": "eslint . --fix --ignore-path .gitignore",
+        "format": "prettier --ignore-path .gitignore --check .",
+        "format:fix": "prettier --ignore-path .gitignore . --write",
+        "lint:style": "stylelint --ignore-path .gitignore \"./**/*.css\"",
+        "lint:style:fix": "npm run lint:style --fix",
+        "prepare": "husky install"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/decel337/WebLab3.git"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/decel337/WebLab3/issues"
+    },
+    "homepage": "https://github.com/decel337/WebLab3#readme",
+    "devDependencies": {
+        "eslint": "^8.2.0",
+        "eslint-config-metarhia": "^7.0.1",
+        "eslint-plugin-import": "^2.25.2",
+        "eslint-plugin-sonarjs": "^0.10.0",
+        "husky": "^7.0.4",
+        "prettier": "^2.4.1",
+        "stylelint": "^14.0.1",
+        "stylelint-config-prettier": "^9.0.3"
+    }
+}

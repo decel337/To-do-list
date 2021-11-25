@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>TODO</title>
+    </head>
+    <body>
+        <div class="wrapper">
+            <div class="form">
+                <form id="form" class="form_body" method="post">
+                    <div id="alert" class="alert">
+                        <span
+                            id="clsbtn"
+                            class="closebtn"
+                            onclick="this.parentElement.classList.add('_hide');"
+                            >&times;</span
+                        >
+                        <label id="text"></label>
+                    </div>
+                    <h1 class="form_title">TODO</h1>
+                    <div class="form_item">
+                        <input
+                            id="input"
+                            type="text"
+                            class="form_input"
+                            placeholder="Enter your task" />
+                    </div>
+                    <button type="submit" class="form_button">Add Task</button>
+                    <ul class="todos _list" id="todos"></ul>
+                </form>
+            </div>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,200 @@
+::before,
+::after {
+    border: 0;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+* {
+    --background-color: #00fa9aff;
+    --formtext-color: #800080ff;
+    --error-color: #f44336ff;
+    --textandbtn-color: #fff;
+    --background-li-color: #f7f7f7ff;
+    --background-li-hover-color: #ffffd4ff;
+    --pointed-color: #fff600ff;
+    --btnhover-color: #000f;
+    --formbtn-color: #ffff87ff;
+    --formbtnhover-color: #fdfdad;
+    --clstask-color: #789f;
+    --load-color: #00fa9ae5;
+}
+
+a {
+    text-decoration: none;
+}
+
+html,
+body {
+    background-color: var(--background-color);
+
+    font-size: 14px;
+    line-height: 1;
+}
+
+.form {
+    color: var(--formtext-color);
+    margin: 0 auto;
+    max-width: 800px;
+}
+
+.form_body {
+    position: relative;
+}
+
+.alert {
+    visibility: hidden;
+}
+
+.alert._hide {
+    display: none;
+}
+
+.alert._error {
+    background-color: var(--error-color);
+    color: var(--textandbtn-color);
+    margin-bottom: 15px;
+    padding: 20px;
+    visibility: visible;
+}
+
+.closebtn {
+    color: var(--textandbtn-color);
+    cursor: pointer;
+    float: right;
+    font-size: 22px;
+    font-weight: bold;
+    line-height: 20px;
+    margin-left: 15px;
+    transition: 0.3s;
+}
+
+.closebtn:hover {
+    color: var(--btnhover-color);
+}
+
+.form._sending::after {
+    background: var(--load-color) url('loading.gif') center / 300px no-repeat;
+    content: '';
+    height: 100%;
+    left: 0;
+    min-height: 100vh;
+    opacity: 1;
+    position: absolute;
+    top: 0;
+    transition: all 0.5s ease 0s;
+    visibility: visible;
+    width: 100%;
+}
+
+.form_title {
+    font-family: 'Bradley Hand', cursive;
+    font-size: 40px;
+    font-weight: 600;
+    margin: 0 0 10px;
+    text-align: center;
+}
+
+.form_item {
+    margin: 0 0 20px;
+}
+
+.form_label {
+    color: var(--btnhover-color);
+    display: block;
+    font-size: 18px;
+    margin: 0 0 10px;
+}
+
+.form_input {
+    border-radius: 5px;
+    height: 50px;
+    padding: 0 20px;
+    width: 90%;
+}
+
+.form_input._error {
+    border: 2px double var(--error-color);
+    box-shadow: 0 0 15px var(--error-color);
+}
+
+.todos {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.todos li {
+    background: var(--background-li-color);
+    border: 2px double var(--btnhover-color);
+    cursor: pointer;
+    font-family: serif;
+    font-size: 20px;
+    height: 50px;
+    line-height: 50px;
+    margin-top: 10px;
+}
+
+.todos li:hover {
+    background-color: var(--background-li-hover-color);
+    border: 4px double var(--btnhover-color);
+}
+
+.todos ._hidden {
+    visibility: hidden;
+}
+
+.todos ._pointed {
+    border: 2px double var(--pointed-color);
+}
+
+.todos li .todo-text {
+    font-weight: bold;
+    padding: 0 8px;
+}
+
+.todos li ._checked {
+    font-weight: bold;
+    padding: 0 8px;
+    text-decoration: line-through;
+    text-decoration-color: var(--formtext-color);
+}
+
+.closetask {
+    color: var(--btnhover-color);
+    cursor: pointer;
+    float: right;
+    font-size: 45px;
+    font-weight: bold;
+    margin-right: 10px;
+    transition: 0.3s;
+}
+
+.closetask:hover {
+    color: var(--clstask-color);
+}
+
+.form_button {
+    align-items: center;
+    background-color: var(--formbtn-color);
+    border-radius: 20px;
+    cursor: pointer;
+    display: flex;
+    font-size: 18px;
+    font-weight: 700;
+    justify-content: center;
+    letter-spacing: 2px;
+    min-height: 60px;
+    position: relative;
+    text-transform: uppercase;
+    top: 0;
+    transition: background-color 0.3s ease 0s;
+    width: 100%;
+}
+
+.form_button:hover {
+    background-color: var(--formbtnhover-color);
+    border: 2px solid var(--textandbtn-color);
+    color: var(--btnhover-color);
+}
