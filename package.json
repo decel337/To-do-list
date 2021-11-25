@@ -10,7 +10,8 @@
         "format:fix": "prettier --ignore-path .gitignore . --write",
         "lint:style": "stylelint --ignore-path .gitignore \"./**/*.css\"",
         "lint:style:fix": "npm run lint:style --fix",
-        "prepare": "husky install"
+        "prepare": "husky install",
+        "build": "webpack --env --config webpack.config.js --mode production"
     },
     "repository": {
         "type": "git",
