@@ -1,9 +1,10 @@
-import { toGraphQL, swap, subscribeChange } from './gql.js';
+import { toGraphQL, subscribeChange } from './gql.js';
 import './loading.gif';
 import './style.css';
 //import * as sanitize from 'sanitize-html';
 
 const form = document.getElementById('form');
+const alert = document.getElementById('alert');
 form.addEventListener('submit', addTask);
 form.parentElement.classList.add('_sending');
 
@@ -29,7 +30,7 @@ function outputTask(table) {
 
         const deleteBtn = document.createElement('span');
         deleteBtn.classList.add('closetask');
-        deleteBtn.innerHTML = '&times';
+        deleteBtn.textContent = '&times';
         console.log();
 
         ul.appendChild(li).append(textSpan);
@@ -81,7 +82,6 @@ async function addTask(e) {
 
 export function showTask() {
     toGraphQL('GetTable', {}).then(data => {
-        console.log(process.env.API_KEY);
         if (data[0]?.message) {
             catchError(data[0]);
             return;
@@ -166,12 +166,21 @@ function dragAndDrop() {
     async function DragDrop() {
         form.parentElement.classList.add('_sending');
 
-        swap({
-            Task1: task.childNodes[0].innerHTML,
-            Completed1: isComplete(task.childNodes[0]),
-            Task2: this.childNodes[0].innerHTML,
-            Completed2: isComplete(this.childNodes[0]),
-        }).then(errorHandle);
+        if (nodeIndex(task) > nodeIndex(this)) {
+            toGraphQL('SwapRow', {
+                Task1: task.childNodes[0].textContent,
+                Completed1: isComplete(task.childNodes[0]),
+                Task2: this.childNodes[0].textContent,
+                Completed2: isComplete(this.childNodes[0]),
+            }).then(errorHandle);
+        } else {
+            toGraphQL('SwapRow', {
+                Task1: this.childNodes[0].textContent,
+                Completed1: isComplete(this.childNodes[0]),
+                Task2: task.childNodes[0].textContent,
+                Completed2: isComplete(task.childNodes[0]),
+            }).then(errorHandle);
+        }
         this.classList.remove('_pointed');
     }
 
@@ -191,7 +200,6 @@ function isComplete(el) {
 }
 
 export function catchError(errors) {
-    const alert = document.getElementById('alert');
     clearAlert();
     if (
         !errors ||
@@ -207,10 +215,17 @@ export function catchError(errors) {
 }
 
 function alertText(str) {
-    const labelText = document.getElementById('text');
-    labelText.innerHTML = str;
+    const labelText = document.getElementById('alert').children[1];
+    labelText.textContent = str;
 }
 function clearAlert() {
-    const alert = document.getElementById('alert');
     alert.className = 'alert';
+}
+function nodeIndex(el) {
+    let i = 0;
+    while (el.previousElementSibling) {
+        el = el.previousElementSibling;
+        i++;
+    }
+    return i;
 }

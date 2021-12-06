@@ -7,26 +7,21 @@
     <body>
         <div class="wrapper">
             <div class="form">
-                <form id="form" class="form_body" method="post">
+                <form id="form" class="form_body">
                     <div id="alert" class="alert">
                         <span
-                            id="clsbtn"
                             class="closebtn"
                             onclick="this.parentElement.classList.add('_hide');"
                             >&times;</span
                         >
-                        <label id="text"></label>
+                        <label></label>
                     </div>
-                    <h1 class="form_title">TODO</h1>
+                    <h1>TODO</h1>
                     <div class="form_item">
-                        <input
-                            id="input"
-                            type="text"
-                            class="form_input"
-                            placeholder="Enter your task" />
+                        <input placeholder="Enter your task" />
                     </div>
                     <button type="submit" class="form_button">Add Task</button>
-                    <ul class="todos _list" id="todos"></ul>
+                    <ul class="todos"></ul>
                 </form>
             </div>
         </div>

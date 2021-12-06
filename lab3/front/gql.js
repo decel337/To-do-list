@@ -48,24 +48,20 @@ mutation CheckTask($Task: String = "", $Completed: Boolean) {
   }
 }
 
-mutation SwapRow1($Task1:String = "", $Task2:String = "", $Completed2: Boolean){
-  update_TODO_TASK(where:
+mutation SwapRow($Task1:String = "",$Completed1: Boolean,
+$Task2:String = "", $Completed2: Boolean){
+  first: update_TODO_TASK(where:
   {Task: {_eq: $Task1}}, _set: {Task: $Task2, Completed: $Completed2})
   {
-    returning {
-      ID
-    }
+    affected_rows
   }
-}
 
-mutation SwapRow2($Task1: String = "", $Completed1: Boolean,
-                                        $Task2: String = "", $ID: Int) {
-  update_TODO_TASK(where:
-        {Task: {_eq: $Task2}, ID: {_neq: $ID}},
+  second: update_TODO_TASK(where:
+        {Task: {_eq: $Task2}},
             _set: {Task: $Task1, Completed: $Completed1}) {
                    affected_rows
                                                             }
-                                                                        }
+}
 `;
 
 const subscription = `subscription Subscription {
@@ -120,39 +116,6 @@ export async function toGraphQL(request, variable) {
 
     return data;
     // do something great with this precious data
-}
-
-export async function swap(variable) {
-    const temp = variable.Completed1;
-    delete variable.Completed1;
-
-    const { errors, data } = await executeMyMutation('SwapRow1', variable);
-
-    if (errors) {
-        // handle those errors like a pro
-        return errors;
-    }
-
-    // do something great with this precious data
-
-    delete variable.Completed2;
-    variable.Completed1 = temp;
-    variable.ID = data.update_TODO_TASK.returning[0].ID;
-
-    return swap1(variable);
-}
-
-async function swap1(variable) {
-    console.log(variable);
-
-    const { errors, data } = await executeMyMutation('SwapRow2', variable);
-
-    if (errors) {
-        // handle those errors like a pro
-        return errors;
-    }
-
-    return data;
 }
 
 function headers() {
