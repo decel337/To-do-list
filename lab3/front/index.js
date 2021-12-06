@@ -30,7 +30,7 @@ function outputTask(table) {
 
         const deleteBtn = document.createElement('span');
         deleteBtn.classList.add('closetask');
-        deleteBtn.textContent = '&times';
+        deleteBtn.textContent = '&times;';
         console.log();
 
         ul.appendChild(li).append(textSpan);
@@ -140,9 +140,11 @@ function dragAndDrop() {
     const elements = document.getElementById('todos').children;
     console.log(elements[0]);
     const DragStart = function () {
-        setTimeout(() => {
-            this.classList.add('_hidden');
-        }, 0);
+        if (task !== this) {
+            setTimeout(() => {
+                this.classList.add('_hidden');
+            }, 0);
+        }
     };
 
     const DragEnd = function () {
