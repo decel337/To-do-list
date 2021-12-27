@@ -134,7 +134,7 @@ function dragAndDrop() {
     const task = this;
     let lastEnter;
     //console.log(task);
-    const elements = document.getElementById('todos').children;
+    const elements = document.querySelector('ul.todos').children;
     console.log(elements[0]);
     const DragStart = function () {
         if (task !== this) {
