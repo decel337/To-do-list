@@ -25,7 +25,6 @@
     },
     "homepage": "https://github.com/decel337/WebLab3#readme",
     "devDependencies": {
-        "@urql/core": "^2.3.5",
         "css-loader": "^6.5.1",
         "dotenv-webpack": "^7.0.3",
         "eslint": "^8.2.0",
@@ -44,7 +43,10 @@
         "stylelint-declaration-use-variable": "^1.7.3",
         "subscriptions-transport-ws": "^0.11.0",
         "webpack": "^5.64.1",
-        "webpack-cli": "^4.9.1",
+        "webpack-cli": "^4.9.1"
+    },
+    "dependencies": {
+        "@urql/core": "^2.3.6",
         "wonka": "^4.0.15"
     }
 }
