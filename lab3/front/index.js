@@ -5,6 +5,7 @@ import './style.css';
 
 const form = document.getElementById('form');
 const alert = document.getElementById('alert');
+const reg = /^\s*$/;
 form.addEventListener('submit', addTask);
 form.parentElement.classList.add('_sending');
 
@@ -45,17 +46,15 @@ function outputTask(table) {
 }
 
 function inputValidate(str) {
-    const reg = /^\s*$/;
-    let res = true;
+    const ul = document.querySelector('ul.todos');
+
+    let res = ul.children.prototype.some(
+        li => li.childNodes[0]?.textContent !== str,
+    );
+
     if (reg.test(str)) {
         res = false;
     }
-
-    const ul = document.querySelector('ul.todos');
-
-    res = ul.children.prototype.some(
-        li => li.childNodes[0]?.textContent === str,
-    );
 
     if (!res) {
         form.elements['input'].classList.add('_error');
