@@ -31,7 +31,8 @@ function outputTask(table) {
 
         const deleteBtn = document.createElement('span');
         deleteBtn.classList.add('closetask');
-        deleteBtn.textContent = '&times'.html();
+        const txt = document.createTextNode('\u00D7');
+        deleteBtn.add(txt);
 
         ul.appendChild(li).append(textSpan);
         ul.appendChild(li).append(deleteBtn);
