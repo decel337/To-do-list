@@ -114,7 +114,7 @@ body {
     width: 90%;
 }
 
-.form_input._error {
+.form_item input ._error {
     border: 2px double var(--error-color);
     box-shadow: 0 0 15px var(--error-color);
 }
@@ -141,11 +141,11 @@ body {
     border: 4px double var(--btnhover-color);
 }
 
-.todos ._hidden {
+.todos li ._hidden {
     visibility: hidden;
 }
 
-.todos ._pointed {
+.todos li ._pointed {
     border: 2px double var(--pointed-color);
 }
 
