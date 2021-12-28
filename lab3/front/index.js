@@ -170,17 +170,17 @@ function dragAndDrop() {
 
         if (nodeIndex(task) > nodeIndex(this)) {
             toGraphQL('SwapRow', {
-                Task1: this.childNodes[0].textContent,
-                Completed1: isComplete(this.childNodes[0]),
-                Task2: task.childNodes[0].textContent,
-                Completed2: isComplete(task.childNodes[0]),
-            }).then(errorHandle);
-        } else {
-            toGraphQL('SwapRow', {
                 Task1: task.childNodes[0].textContent,
                 Completed1: isComplete(task.childNodes[0]),
                 Task2: this.childNodes[0].textContent,
                 Completed2: isComplete(this.childNodes[0]),
+            }).then(errorHandle);
+        } else {
+            toGraphQL('SwapRow', {
+                Task1: this.childNodes[0].textContent,
+                Completed1: isComplete(this.childNodes[0]),
+                Task2: task.childNodes[0].textContent,
+                Completed2: isComplete(task.childNodes[0]),
             }).then(errorHandle);
         }
         this.classList.remove('_pointed');
