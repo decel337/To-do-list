@@ -49,7 +49,7 @@ function outputTask(table) {
 function inputValidate(str) {
     const ul = document.querySelector('ul.todos');
 
-    let res = ul.children.prototype.some(
+    let res = Array.from(ul.children).some(
         li => li.childNodes[0]?.textContent !== str,
     );
 
