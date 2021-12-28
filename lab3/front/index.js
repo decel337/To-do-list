@@ -49,7 +49,9 @@ function outputTask(table) {
 function inputValidate(str) {
     const ul = document.querySelector('ul.todos');
 
-    let res = ul.children.some(li => li.childNodes[0]?.textContent !== str);
+    let res = ul.children.prototype.some(
+        li => li.childNodes[0]?.textContent !== str,
+    );
 
     if (reg.test(str)) {
         res = false;
