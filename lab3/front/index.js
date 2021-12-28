@@ -31,7 +31,8 @@ function outputTask(table) {
 
         const deleteBtn = document.createElement('span');
         deleteBtn.classList.add('closetask');
-        deleteBtn.innerHTML = '&times';
+        const txt = document.createTextNode('\u00D7');
+        deleteBtn.appendChild(txt);
         console.log();
 
         ul.appendChild(li).append(textSpan);
@@ -52,7 +53,7 @@ function inputValidate(str) {
     const ul = document.querySelector('ul.todos');
 
     res = !Array.from(ul.children).some(
-        li => li.childNodes[0].textContent === str,
+        li => li.childNodes[0]?.textContent === str,
     );
 
     if (reg.test(str)) {
@@ -115,7 +116,7 @@ function deleteTask(element) {
     element.addEventListener('click', event => {
         form.parentElement.classList.add('_sending');
         toGraphQL('DeleteTask', {
-            Task: element.parentElement.childNodes[0].textContent,
+            Task: element.parentElement.childNodes[0]?.textContent,
         }).then(errorHandle);
         event.stopPropagation();
     });
@@ -125,7 +126,7 @@ function checked(element) {
     element.addEventListener('click', event => {
         form.parentElement.classList.add('_sending');
         toGraphQL('CheckTask', {
-            Task: element.parentElement.childNodes[0].textContent,
+            Task: element.parentElement.childNodes[0]?.textContent,
             Completed: !isComplete(element),
         }).then(errorHandle);
         event.stopPropagation();
@@ -135,9 +136,7 @@ function checked(element) {
 function dragAndDrop() {
     const task = this;
     let lastEnter;
-    //console.log(task);
     const elements = document.querySelector('ul.todos').children;
-    console.log(elements[0]);
     const DragStart = function () {
         if (task !== this) {
             setTimeout(() => {
@@ -168,9 +167,9 @@ function dragAndDrop() {
         form.parentElement.classList.add('_sending');
 
         toGraphQL('SwapRow', {
-            Task1: this.childNodes[0].textContent,
+            Task1: this.childNodes[0]?.textContent,
             Completed1: isComplete(this.childNodes[0]),
-            Task2: task.childNodes[0].textContent,
+            Task2: task.childNodes[0]?.textContent,
             Completed2: isComplete(task.childNodes[0]),
             temp: process.env.TEMP,
         }).then(errorHandle);

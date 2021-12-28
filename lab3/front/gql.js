@@ -112,15 +112,9 @@ function executeMyMutation(request, variable) {
 }
 
 export async function toGraphQL(request, variable) {
-    const { errors, data } = await executeMyMutation(request, variable);
-
-    if (errors) {
-        // handle those errors like a pro
-        return errors;
-    }
+    const { data } = await executeMyMutation(request, variable);
 
     return data;
-    // do something great with this precious data
 }
 
 function headers() {
