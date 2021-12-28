@@ -5,7 +5,6 @@ import './style.css';
 
 const form = document.getElementById('form');
 const alert = document.getElementById('alert');
-const reg = /^\s*$/;
 form.addEventListener('submit', addTask);
 form.parentElement.classList.add('_sending');
 
@@ -31,10 +30,8 @@ function outputTask(table) {
 
         const deleteBtn = document.createElement('span');
         deleteBtn.classList.add('closetask');
-
         deleteBtn.innerHTML = '&times';
-        /*const txt = document.createTextNode('\u00D7');
-        deleteBtn.appendChild(txt);*/
+        console.log();
 
         ul.appendChild(li).append(textSpan);
         ul.appendChild(li).append(deleteBtn);
@@ -49,18 +46,19 @@ function outputTask(table) {
 }
 
 function inputValidate(str) {
-    //const ul = document.querySelector('ul.todos');
+    const reg = /^\s*$/;
     let res = true;
-
-    /*res = Array.from(ul.children).some(
-        li => li.childNodes[0]?.textContent !== str
-    );
-    console.log(res);*/
-
     if (reg.test(str)) {
         res = false;
     }
-    console.log(res);
+
+    const ul = document.querySelector('ul.todos');
+
+    for (const li of ul.children) {
+        if (li.childNodes[0].textContent === str) {
+            res = false;
+        }
+    }
 
     if (!res) {
         form.elements['input'].classList.add('_error');
@@ -139,7 +137,7 @@ function dragAndDrop() {
     const task = this;
     let lastEnter;
     //console.log(task);
-    const elements = document.querySelector('ul.todos').children;
+    const elements = document.getElementById('todos').children;
     console.log(elements[0]);
     const DragStart = function () {
         if (task !== this) {
@@ -172,17 +170,17 @@ function dragAndDrop() {
 
         if (nodeIndex(task) > nodeIndex(this)) {
             toGraphQL('SwapRow', {
-                Task1: task.childNodes[0].textContent,
-                Completed1: isComplete(task.childNodes[0]),
-                Task2: this.childNodes[0].textContent,
-                Completed2: isComplete(this.childNodes[0]),
-            }).then(errorHandle);
-        } else {
-            toGraphQL('SwapRow', {
                 Task1: this.childNodes[0].textContent,
                 Completed1: isComplete(this.childNodes[0]),
                 Task2: task.childNodes[0].textContent,
                 Completed2: isComplete(task.childNodes[0]),
+            }).then(errorHandle);
+        } else {
+            toGraphQL('SwapRow', {
+                Task1: task.childNodes[0].textContent,
+                Completed1: isComplete(task.childNodes[0]),
+                Task2: this.childNodes[0].textContent,
+                Completed2: isComplete(this.childNodes[0]),
             }).then(errorHandle);
         }
         this.classList.remove('_pointed');
