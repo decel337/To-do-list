@@ -32,8 +32,9 @@ function outputTask(table) {
         const deleteBtn = document.createElement('span');
         deleteBtn.classList.add('closetask');
 
-        const txt = document.createTextNode('\u00D7');
-        deleteBtn.appendChild(txt);
+        deleteBtn.innerHTML = '&times';
+        /*const txt = document.createTextNode('\u00D7');
+        deleteBtn.appendChild(txt);*/
 
         ul.appendChild(li).append(textSpan);
         ul.appendChild(li).append(deleteBtn);
@@ -48,13 +49,13 @@ function outputTask(table) {
 }
 
 function inputValidate(str) {
-    const ul = document.querySelector('ul.todos');
+    //const ul = document.querySelector('ul.todos');
     let res = true;
 
-    res = Array.from(ul.children).some(
-        li => li.childNodes[0]?.textContent !== str,
+    /*res = Array.from(ul.children).some(
+        li => li.childNodes[0]?.textContent !== str
     );
-    console.log(res);
+    console.log(res);*/
 
     if (reg.test(str)) {
         res = false;
