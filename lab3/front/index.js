@@ -118,7 +118,7 @@ function deleteTask(element) {
     element.addEventListener('click', event => {
         form.parentElement.classList.add('_sending');
         toGraphQL('DeleteTask', {
-            Task: element.parentElement.childNodes[0]?.textContent,
+            Task: element.parentElement.childNodes[0].textContent,
         }).then(errorHandle);
         event.stopPropagation();
     });
@@ -128,7 +128,7 @@ function checked(element) {
     element.addEventListener('click', event => {
         form.parentElement.classList.add('_sending');
         toGraphQL('CheckTask', {
-            Task: element.parentElement.childNodes[0]?.textContent,
+            Task: element.parentElement.childNodes[0].textContent,
             Completed: !isComplete(element),
         }).then(errorHandle);
         event.stopPropagation();
@@ -172,16 +172,16 @@ function dragAndDrop() {
 
         if (nodeIndex(task) > nodeIndex(this)) {
             toGraphQL('SwapRow', {
-                Task1: this.childNodes[0]?.textContent,
+                Task1: this.childNodes[0].textContent,
                 Completed1: isComplete(this.childNodes[0]),
-                Task2: task.childNodes[0]?.textContent,
+                Task2: task.childNodes[0].textContent,
                 Completed2: isComplete(task.childNodes[0]),
             }).then(errorHandle);
         } else {
             toGraphQL('SwapRow', {
-                Task1: task.childNodes[0]?.textContent,
+                Task1: task.childNodes[0].textContent,
                 Completed1: isComplete(task.childNodes[0]),
-                Task2: this.childNodes[0]?.textContent,
+                Task2: this.childNodes[0].textContent,
                 Completed2: isComplete(this.childNodes[0]),
             }).then(errorHandle);
         }
