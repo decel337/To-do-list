@@ -5,6 +5,7 @@ import './style.css';
 
 const form = document.getElementById('form');
 const alert = document.getElementById('alert');
+const reg = /^\s*$/;
 form.addEventListener('submit', addTask);
 form.parentElement.classList.add('_sending');
 
@@ -46,18 +47,16 @@ function outputTask(table) {
 }
 
 function inputValidate(str) {
-    const reg = /^\s*$/;
     let res = true;
-    if (reg.test(str)) {
-        res = false;
-    }
 
     const ul = document.querySelector('ul.todos');
 
-    for (const li of ul.children) {
-        if (li.childNodes[0].textContent === str) {
-            res = false;
-        }
+    res = !Array.from(ul.children).some(
+        li => li.childNodes[0].textContent === str,
+    );
+
+    if (reg.test(str)) {
+        res = false;
     }
 
     if (!res) {
@@ -173,7 +172,7 @@ function dragAndDrop() {
             Completed1: isComplete(this.childNodes[0]),
             Task2: task.childNodes[0].textContent,
             Completed2: isComplete(task.childNodes[0]),
-            temp: 'urururur',
+            temp: process.env.TEMP,
         }).then(errorHandle);
 
         this.classList.remove('_pointed');
