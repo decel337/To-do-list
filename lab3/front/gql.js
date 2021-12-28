@@ -49,9 +49,9 @@ mutation CheckTask($Task: String = "", $Completed: Boolean) {
 }
 
 mutation SwapRow($Task1:String = "",$Completed1: Boolean,
-$Task2:String = "", $Completed2: Boolean){
+$Task2:String = "", $Completed2: Boolean, $temp:String=""){
   first: update_TODO_TASK(where:
-  {Task: {_eq: $Task1}}, _set: {Task: $Task2, Completed: $Completed2})
+  {Task: {_eq: $Task1}}, _set: {Task: $temp, Completed: $Completed2})
   {
     affected_rows
   }
@@ -59,6 +59,11 @@ $Task2:String = "", $Completed2: Boolean){
   second: update_TODO_TASK(where:
         {Task: {_eq: $Task2}},
             _set: {Task: $Task1, Completed: $Completed1}) {
+                   affected_rows
+                                                            }
+  third:update_TODO_TASK(where:
+        {Task: {_eq: $temp}},
+            _set: {Task: $Task2, Completed: $Completed2}) {
                    affected_rows
                                                             }
 }
