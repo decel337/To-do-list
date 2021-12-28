@@ -50,7 +50,7 @@ function inputValidate(str) {
     const ul = document.querySelector('ul.todos');
 
     let res = Array.from(ul.children).some(
-        li => li.childNodes[0]?.textContent !== str,
+        li => li.childNodes[0]?.textContent === str,
     );
 
     if (reg.test(str)) {
