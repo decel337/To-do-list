@@ -33,7 +33,6 @@ function outputTask(table) {
         deleteBtn.classList.add('closetask');
         const txt = document.createTextNode('\u00D7');
         deleteBtn.appendChild(txt);
-        console.log();
 
         ul.appendChild(li).append(textSpan);
         ul.appendChild(li).append(deleteBtn);
