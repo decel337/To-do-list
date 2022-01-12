@@ -10,7 +10,7 @@ form.addEventListener('submit', addTask);
 form.parentElement.classList.add('_sending');
 
 const errorHandle = res => {
-    if (res[0]?.message) {
+    if (res && res[0]?.message) {
         catchError(res[0]);
     }
 };
@@ -81,7 +81,8 @@ async function addTask(e) {
 
 export function showTask() {
     toGraphQL('GetTable', {}).then(data => {
-        if (data[0]?.message) {
+        form.parentElement.classList.remove('_sending');
+        if (!data || data[0]?.message) {
             catchError(data[0]);
             return;
         }
@@ -91,10 +92,6 @@ export function showTask() {
         for (const ul of form.children[4].childNodes) {
             ul.addEventListener('mousedown', dragAndDrop);
         }
-        //console.log(form.children[3].childNodes[3]);
-        document
-            .getElementById('form')
-            .parentElement.classList.remove('_sending');
     });
 }
 
@@ -137,11 +134,9 @@ function dragAndDrop() {
     let lastEnter;
     const elements = document.querySelector('ul.todos').children;
     const DragStart = function () {
-        if (task !== this) {
-            setTimeout(() => {
-                this.classList.add('_hidden');
-            }, 0);
-        }
+        setTimeout(() => {
+            this.classList.add('_hidden');
+        }, 0);
     };
 
     const DragEnd = function () {
@@ -160,7 +155,6 @@ function dragAndDrop() {
         if (lastEnter === e.target) {
             this.classList.remove('_pointed');
         }
-        console.log('leave');
     };
     async function DragDrop() {
         form.parentElement.classList.add('_sending');

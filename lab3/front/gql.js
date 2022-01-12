@@ -16,7 +16,8 @@ async function fetchGraphQL(operationsDoc, operationName, variables) {
             variables,
             operationName,
         }),
-    });
+    }).catch(() => ({}));
+
     return result.json();
 }
 
@@ -55,7 +56,6 @@ $Task2:String = "", $Completed2: Boolean, $temp:String=""){
   {
     affected_rows
   }
-
   second: update_TODO_TASK(where:
         {Task: {_eq: $Task2}},
             _set: {Task: $Task1, Completed: $Completed1}) {
@@ -107,12 +107,16 @@ export function subscribeChange() {
     );
 }
 
-function executeMyMutation(request, variable) {
-    return fetchGraphQL(operationsDoc, request, variable);
-}
-
 export async function toGraphQL(request, variable) {
-    const { data } = await executeMyMutation(request, variable);
+    const { data, errors } = await fetchGraphQL(
+        operationsDoc,
+        request,
+        variable,
+    );
+
+    if (errors) {
+        return errors;
+    }
 
     return data;
 }
